@@ -24,6 +24,8 @@ if length(day) is 1 {
   day = "0" + day
 }
 today = strings.join([year, month, day], "-")
+print("today is:", today)
+
 base_url = "https://api.nasa.gov/neo/rest/v1/feed?"
 start_query = "start_date=" + today
 api_query = "&api_key=" + api_token
@@ -35,6 +37,7 @@ no_close_hazardous_asteroids = func(asteroids, danger_distance) {
     hazardous = asteroid["is_potentially_hazardous_asteroid"]
     approach_data = asteroid["close_approach_data"][0]
     distance = approach_data["miss_distance"]["miles"]
+    print("miss distance of asteroid is:", distance)
     if float(distance) < danger_distance {
       diameter = asteroid["estimated_diameter"]["feet"]
       max_diameter = diameter["estimated_diameter_max"]
@@ -59,7 +62,6 @@ no_close_hazardous_asteroids = func(asteroids, danger_distance) {
 
 resp = http.get(full_url)
 near_earth_objects = json.unmarshal(resp.body)["near_earth_objects"][today]
-#print("near earth objects:", json.unmarshal(resp.body))
 
 no_close_asteroids = no_close_hazardous_asteroids(near_earth_objects, danger_distance)
 main = rule {
