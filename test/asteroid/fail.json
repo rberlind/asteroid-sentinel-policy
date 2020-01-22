@@ -1,0 +1,9 @@
+{
+  "param": {
+    "api_token": "gvJnlK50g4GLHdiWB5WLdIB2vVixUjzQgNQPif2F",
+    "danger_distance": 10000000
+  },
+  "test": {
+    "main": false
+  }
+}
